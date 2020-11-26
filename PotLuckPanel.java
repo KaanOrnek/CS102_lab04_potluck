@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 public class PotLuckPanel extends JPanel {
+    //instance data members
     private JPanel tryPanel;
     private JPanel buttonPanel;
     private int currentTries;
@@ -17,16 +18,18 @@ public class PotLuckPanel extends JPanel {
     private int bomb2Num;
     private GridLayout a;
 
+    //constructor with the int dimension as a paramater taken from the main class to from the game.
     public PotLuckPanel(int dimension){
 
         currentTries = 0;
-
         buttons = new ArrayList<JButton>();
 
+        //background's features
         ButtonListener listener = new ButtonListener();
         setBackground(Color.GREEN);
         setPreferredSize( new Dimension( 600,400));
 
+        //panel for the status bar
         label = new JLabel( ""+ currentTries);
 
         tryPanel = new JPanel();
@@ -36,6 +39,7 @@ public class PotLuckPanel extends JPanel {
 
         add(tryPanel);
 
+        //panel for the buttons
         a = new GridLayout(dimension,dimension);
 
         buttonPanel = new JPanel();
@@ -44,14 +48,17 @@ public class PotLuckPanel extends JPanel {
         buttonPanel.setLayout(a);
 
         prizeNum = (int)(Math.random()*(dimension*dimension) + 1);
+
         do{
             bomb1Num = (int)(Math.random()*(dimension*dimension) + 1);
         }while(prizeNum == bomb1Num);
+
         do{
             bomb2Num = (int)(Math.random()*(dimension*dimension) + 1);
         }while(bomb2Num == bomb1Num || bomb2Num == prizeNum);
 
-        for( int i = 0; i < (dimension*dimension); i++){
+        for( int i = 0; i < (dimension*dimension); i++)
+        {
             buttons.add( new JButton("Pot "+ (i+1)));
             buttonPanel.add( buttons.get(i));
             buttons.get(i).addActionListener(listener);
@@ -64,15 +71,12 @@ public class PotLuckPanel extends JPanel {
 
         }
         add(buttonPanel);
-
-
-
-
     }
 
-
-
-
+    /*
+    Listener for the buttons that checks if the selected button is the prize button or one of the bomb buttons.
+    And sets the label text according to the result.
+     */
     private class ButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent event) {

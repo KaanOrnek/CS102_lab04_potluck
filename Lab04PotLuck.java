@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import javax.swing.*;
 
-public class Lab05PotLuck {
+public class Lab04PotLuck {
     public static void main (String [] args){
         Scanner scan = new Scanner(System.in);
 
